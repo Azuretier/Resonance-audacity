@@ -21,38 +21,46 @@ export function RuleLesson({ rule, isCompleted, onComplete, ruleNumber, totalRul
       animate={{ opacity: 1, y: 0 }}
       className="space-y-6"
     >
-      <Card className="retro-card p-8">
-        <div className="space-y-6">
+      <Card className="p-8 border-border/50 shadow-lg bg-card/50 backdrop-blur-sm">
+        <div className="space-y-8">
           <div className="flex items-start justify-between gap-4">
             <div className="flex items-center gap-4">
-              <div className="text-6xl sparkle" style={{ animation: 'float 2s ease-in-out infinite' }}>{rule.icon}</div>
+              <div className="text-5xl">{rule.icon}</div>
               <div>
-                <Badge variant="outline" className="mb-2 retro-border font-bold bg-gradient-to-r from-pink-200 to-purple-200">
-                  ⭐ Rule {ruleNumber} of {totalRules} ⭐
+                <Badge variant="outline" className="mb-3 font-medium">
+                  Rule {ruleNumber} of {totalRules}
                 </Badge>
-                <h2 className="text-3xl font-bold tracking-tight retro-text-shadow">{rule.title}</h2>
+                <h2 className="text-3xl font-bold tracking-tight">{rule.title}</h2>
               </div>
             </div>
             {isCompleted && (
-              <Badge className="retro-border px-3 py-1 font-bold bg-gradient-to-br from-green-300 to-emerald-300 bounce-in">
-                <Check className="h-4 w-4 mr-1" weight="bold" />
-                Completed!!!
-              </Badge>
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ type: "spring", duration: 0.5 }}
+              >
+                <Badge className="px-3 py-1.5 font-semibold bg-success text-success-foreground border-0">
+                  <Check className="h-4 w-4 mr-1.5" weight="bold" />
+                  Completed
+                </Badge>
+              </motion.div>
             )}
           </div>
 
-          <Separator className="border-4 border-double border-purple-400" />
+          <Separator />
 
           <div className="prose prose-lg max-w-none">
-            <p className="text-lg leading-relaxed font-semibold">
+            <p className="text-lg leading-relaxed text-foreground/80">
               {rule.description}
             </p>
           </div>
 
           <div className="space-y-4">
-            <div className="flex items-center gap-2 font-bold text-purple-700">
-              <Lightbulb className="h-5 w-5 sparkle" weight="fill" />
-              <h3 className="text-xl">✨ Key Examples ✨</h3>
+            <div className="flex items-center gap-2.5">
+              <div className="p-2 bg-accent/50 rounded-lg">
+                <Lightbulb className="h-5 w-5 text-accent-foreground" weight="duotone" />
+              </div>
+              <h3 className="text-xl font-semibold">Key Examples</h3>
             </div>
             
             <div className="grid gap-3">
@@ -62,50 +70,51 @@ export function RuleLesson({ rule, isCompleted, onComplete, ruleNumber, totalRul
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: idx * 0.1 }}
-                  className="flex items-start gap-3 p-4 border-4 border-double bg-gradient-to-r from-cyan-100 to-blue-100"
-                  style={{ borderColor: ['#ff00ff', '#00ffff', '#ffff00'][idx % 3] }}
+                  className="flex items-start gap-3 p-4 rounded-xl bg-accent/30 border border-accent/50"
                 >
-                  <div className="mt-0.5 h-8 w-8 flex items-center justify-center flex-shrink-0 retro-border bg-gradient-to-br from-pink-300 to-purple-300">
-                    <span className="font-bold text-lg">{idx + 1}</span>
+                  <div className="mt-0.5 h-7 w-7 flex items-center justify-center flex-shrink-0 rounded-lg bg-primary text-primary-foreground font-semibold text-sm">
+                    {idx + 1}
                   </div>
-                  <p className="text-base leading-relaxed font-semibold">{example}</p>
+                  <p className="text-base leading-relaxed">{example}</p>
                 </motion.div>
               ))}
             </div>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-4">
+          <div className="grid md:grid-cols-2 gap-6">
             <div className="space-y-3">
-              <div className="flex items-center gap-2 text-green-700 font-bold">
-                <CheckCircle className="h-6 w-6 sparkle" weight="fill" />
-                <h4 className="text-xl">✓ Do This ✓</h4>
+              <div className="flex items-center gap-2.5">
+                <div className="p-2 bg-success/10 rounded-lg">
+                  <CheckCircle className="h-5 w-5 text-success" weight="duotone" />
+                </div>
+                <h4 className="text-lg font-semibold">Do This</h4>
               </div>
               <div className="space-y-2">
                 {rule.doExamples.map((example, idx) => (
                   <div
                     key={idx}
-                    className="p-3 border-3 bg-gradient-to-br from-green-100 to-emerald-100 text-sm font-semibold"
-                    style={{ border: '3px solid #00ff00' }}
+                    className="p-3.5 rounded-lg bg-success/5 border border-success/20 text-sm"
                   >
-                    ✓ {example}
+                    {example}
                   </div>
                 ))}
               </div>
             </div>
 
             <div className="space-y-3">
-              <div className="flex items-center gap-2 text-red-700 font-bold">
-                <XCircle className="h-6 w-6" weight="fill" />
-                <h4 className="text-xl">✗ Don't Do This ✗</h4>
+              <div className="flex items-center gap-2.5">
+                <div className="p-2 bg-destructive/10 rounded-lg">
+                  <XCircle className="h-5 w-5 text-destructive" weight="duotone" />
+                </div>
+                <h4 className="text-lg font-semibold">Don't Do This</h4>
               </div>
               <div className="space-y-2">
                 {rule.dontExamples.map((example, idx) => (
                   <div
                     key={idx}
-                    className="p-3 border-3 bg-gradient-to-br from-red-100 to-pink-100 text-sm font-semibold"
-                    style={{ border: '3px solid #ff0000' }}
+                    className="p-3.5 rounded-lg bg-destructive/5 border border-destructive/20 text-sm"
                   >
-                    ✗ {example}
+                    {example}
                   </div>
                 ))}
               </div>
@@ -117,9 +126,9 @@ export function RuleLesson({ rule, isCompleted, onComplete, ruleNumber, totalRul
               <Button
                 size="lg"
                 onClick={onComplete}
-                className="gap-2 text-xl px-8 py-6 pulse-glow font-bold retro-border bg-gradient-to-r from-yellow-300 via-pink-300 to-purple-300"
+                className="gap-2 text-lg px-8 shadow-lg shadow-primary/20"
               >
-                <Check className="h-5 w-5 sparkle" weight="bold" />
+                <Check className="h-5 w-5" weight="bold" />
                 Got It! Continue
               </Button>
             ) : (

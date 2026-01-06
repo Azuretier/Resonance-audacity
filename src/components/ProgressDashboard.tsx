@@ -22,31 +22,25 @@ export function ProgressDashboard({ rules, progress, totalPoints, onRuleSelect }
   return (
     <div className="space-y-6">
       <div className="grid sm:grid-cols-3 gap-4">
-        <Card className="retro-card p-6 text-center">
-          <div className="text-5xl font-bold font-mono pulse-glow mb-2" style={{
-            background: 'linear-gradient(45deg, #ff00ff, #00ffff)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent'
-          }}>{completedCount}/{rules.length}</div>
-          <p className="text-sm font-bold text-purple-700">⭐ Rules Completed ⭐</p>
+        <Card className="p-6 text-center border-border/50 bg-card/50 backdrop-blur-sm">
+          <div className="text-5xl font-bold font-mono tabular-nums mb-2 bg-gradient-to-br from-primary to-primary/60 bg-clip-text text-transparent">
+            {completedCount}/{rules.length}
+          </div>
+          <p className="text-sm font-medium text-muted-foreground">Rules Completed</p>
         </Card>
 
-        <Card className="retro-card p-6 text-center">
-          <div className="text-5xl font-bold font-mono pulse-glow mb-2" style={{
-            background: 'linear-gradient(45deg, #00ff00, #ffff00)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent'
-          }}>{masteredCount}/{rules.length}</div>
-          <p className="text-sm font-bold text-green-700">✓ Rules Mastered ✓</p>
+        <Card className="p-6 text-center border-border/50 bg-card/50 backdrop-blur-sm">
+          <div className="text-5xl font-bold font-mono tabular-nums mb-2 bg-gradient-to-br from-success to-success/60 bg-clip-text text-transparent">
+            {masteredCount}/{rules.length}
+          </div>
+          <p className="text-sm font-medium text-muted-foreground">Rules Mastered</p>
         </Card>
 
-        <Card className="retro-card p-6 text-center">
-          <div className="text-5xl font-bold font-mono sparkle mb-2" style={{
-            background: 'linear-gradient(45deg, #ffff00, #ff00ff)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent'
-          }}>{totalPoints}</div>
-          <p className="text-sm font-bold text-yellow-700">★ Total Points ★</p>
+        <Card className="p-6 text-center border-border/50 bg-card/50 backdrop-blur-sm">
+          <div className="text-5xl font-bold font-mono tabular-nums mb-2 bg-gradient-to-br from-warning to-warning/60 bg-clip-text text-transparent">
+            {totalPoints}
+          </div>
+          <p className="text-sm font-medium text-muted-foreground">Total Points</p>
         </Card>
       </div>
 
@@ -54,20 +48,21 @@ export function ProgressDashboard({ rules, progress, totalPoints, onRuleSelect }
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="bounce-in"
         >
-          <Card className="retro-card p-8 text-center pulse-glow">
-            <Trophy className="h-20 w-20 mx-auto mb-4 sparkle" weight="fill" style={{ color: '#ffff00' }} />
-            <h3 className="text-3xl font-bold mb-2 retro-text-shadow">🎉 Congratulations!!! 🎉</h3>
-            <p className="text-xl font-bold text-purple-700">
-              You've mastered all community rules! You're now a Rules Master with {totalPoints} points!!!
+          <Card className="p-8 text-center border-success/50 bg-gradient-to-br from-success/5 to-success/10 backdrop-blur-sm shadow-lg shadow-success/10">
+            <div className="inline-flex p-6 bg-success/10 rounded-3xl mb-4">
+              <Trophy className="h-20 w-20 text-success" weight="duotone" />
+            </div>
+            <h3 className="text-3xl font-bold mb-2">Congratulations!</h3>
+            <p className="text-lg text-muted-foreground">
+              You've mastered all community rules! You're now a Rules Master with {totalPoints} points!
             </p>
           </Card>
         </motion.div>
       )}
 
-      <Card className="retro-card p-6">
-        <h3 className="text-2xl font-bold mb-4 retro-text-shadow">✨ Your Progress ✨</h3>
+      <Card className="p-6 border-border/50 bg-card/50 backdrop-blur-sm">
+        <h3 className="text-2xl font-bold mb-6">Your Progress</h3>
         <div className="space-y-3">
           {rules.map((rule, index) => {
             const ruleProgress = progress.find(p => p.ruleId === rule.id)
@@ -88,41 +83,41 @@ export function ProgressDashboard({ rules, progress, totalPoints, onRuleSelect }
                   disabled={isLocked}
                   variant="ghost"
                   className={`
-                    w-full justify-start h-auto p-4 transition-all font-bold text-base
-                    ${isLocked ? 'opacity-50 cursor-not-allowed border-2 border-gray-400' : 'retro-border hover:pulse-glow'}
-                    ${isMastered ? 'bg-gradient-to-r from-green-200 to-emerald-200' : isRead ? 'bg-gradient-to-r from-cyan-100 to-blue-100' : 'bg-gradient-to-r from-pink-100 to-purple-100'}
+                    w-full justify-start h-auto p-4 transition-all border
+                    ${isLocked ? 'opacity-50 cursor-not-allowed border-border' : 'border-border/50 hover:border-primary/50 hover:bg-accent/50'}
+                    ${isMastered ? 'bg-success/5 border-success/30' : isRead ? 'bg-primary/5 border-primary/30' : ''}
                   `}
                 >
                   <div className="flex items-center gap-4 w-full">
-                    <div className="text-4xl sparkle">{rule.icon}</div>
+                    <div className="text-3xl">{rule.icon}</div>
                     
                     <div className="flex-1 text-left">
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="font-bold text-lg">{rule.title}</span>
+                        <span className="font-semibold text-base">{rule.title}</span>
                         {isMastered && (
-                          <Badge className="retro-border text-xs font-bold bg-gradient-to-r from-yellow-300 to-orange-300 bounce-in">
-                            <Trophy className="h-3 w-3 mr-1 sparkle" weight="fill" />
-                            Mastered!!!
+                          <Badge className="text-xs font-semibold bg-success text-success-foreground border-0">
+                            <Trophy className="h-3 w-3 mr-1" weight="fill" />
+                            Mastered
                           </Badge>
                         )}
                         {isRead && !isMastered && (
-                          <Badge variant="outline" className="text-xs font-bold border-2 border-green-500">
+                          <Badge variant="outline" className="text-xs font-medium">
                             <Check className="h-3 w-3 mr-1" />
-                            Read ✓
+                            Read
                           </Badge>
                         )}
                         {isLocked && (
-                          <Badge variant="outline" className="text-xs font-bold border-2 border-gray-500">
+                          <Badge variant="outline" className="text-xs font-medium">
                             <Lock className="h-3 w-3 mr-1" />
-                            Locked 🔒
+                            Locked
                           </Badge>
                         )}
                       </div>
-                      <div className="flex items-center gap-4 text-sm font-bold" style={{ color: '#6600cc' }}>
+                      <div className="flex items-center gap-4 text-sm text-muted-foreground">
                         {quizScore !== null && (
                           <span className="flex items-center gap-1">
-                            <Star className="h-4 w-4 sparkle" weight="fill" />
-                            Quiz: {quizScore}/2 ⭐
+                            <Star className="h-4 w-4" weight="duotone" />
+                            Quiz: {quizScore}/2
                           </span>
                         )}
                         {ruleProgress && ruleProgress.quizAttempts > 0 && (

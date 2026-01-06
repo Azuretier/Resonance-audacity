@@ -89,8 +89,8 @@ export function RuleQuiz({ rule, quizzes, onComplete, previousScore, isMastered 
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
       >
-        <Card className="p-8 border-2 text-center space-y-6">
-          <div className={`text-6xl ${isPerfect ? 'bounce-in' : ''}`}>
+        <Card className="p-8 text-center space-y-6 border-border/50 bg-card/50 backdrop-blur-sm shadow-lg">
+          <div className="text-6xl">
             {isPerfect ? '🎉' : finalScore >= quizzes.length * 0.7 ? '👏' : '📚'}
           </div>
 
@@ -104,18 +104,24 @@ export function RuleQuiz({ rule, quizzes, onComplete, previousScore, isMastered 
           </div>
 
           <div className="flex justify-center">
-            <div className="text-center p-6 rounded-xl bg-primary/10 border-2 border-primary/30">
-              <p className="text-sm text-muted-foreground mb-1">Score</p>
-              <p className="text-5xl font-bold font-mono text-primary">{Math.round(percentage)}%</p>
-              <p className="text-sm text-muted-foreground mt-2">+{finalScore * 10} points</p>
+            <div className="text-center p-8 rounded-2xl bg-primary/5 border border-primary/20">
+              <p className="text-sm text-muted-foreground mb-2">Score</p>
+              <p className="text-6xl font-bold font-mono tabular-nums bg-gradient-to-br from-primary to-primary/60 bg-clip-text text-transparent">{Math.round(percentage)}%</p>
+              <p className="text-sm text-muted-foreground mt-3">+{finalScore * 10} points</p>
             </div>
           </div>
 
           {isPerfect && (
-            <Badge className="bg-celebration text-white px-4 py-2 text-lg">
-              <Trophy className="h-5 w-5 mr-2" weight="fill" />
-              Rule Mastered!
-            </Badge>
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ type: "spring", duration: 0.5 }}
+            >
+              <Badge className="bg-success text-success-foreground px-4 py-2 text-lg border-0 shadow-lg shadow-success/20">
+                <Trophy className="h-5 w-5 mr-2" weight="fill" />
+                Rule Mastered!
+              </Badge>
+            </motion.div>
           )}
 
           {!isPerfect && (
@@ -150,22 +156,22 @@ export function RuleQuiz({ rule, quizzes, onComplete, previousScore, isMastered 
 
   return (
     <div className="space-y-6">
-      <Card className="p-6 border-2">
+      <Card className="p-6 border-border/50 bg-card/50 backdrop-blur-sm">
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <Badge variant="outline">
+            <Badge variant="outline" className="font-medium">
               Question {currentQuestionIndex + 1} of {quizzes.length}
             </Badge>
             {isMastered && (
-              <Badge className="bg-celebration text-white">
+              <Badge className="bg-success text-success-foreground border-0">
                 <Trophy className="h-3 w-3 mr-1" weight="fill" />
                 Mastered
               </Badge>
             )}
           </div>
-          <div className="h-2 bg-secondary rounded-full overflow-hidden">
+          <div className="h-2.5 bg-secondary rounded-full overflow-hidden">
             <motion.div
-              className="h-full bg-primary"
+              className="h-full bg-gradient-to-r from-primary to-primary/80 rounded-full"
               initial={{ width: 0 }}
               animate={{ width: `${progress}%` }}
               transition={{ duration: 0.3 }}
@@ -182,7 +188,7 @@ export function RuleQuiz({ rule, quizzes, onComplete, previousScore, isMastered 
           exit={{ opacity: 0, x: -20 }}
           transition={{ duration: 0.3 }}
         >
-          <Card className={`p-8 border-2 ${showFeedback ? (isCorrect ? 'border-accent' : 'border-destructive shake') : ''}`}>
+          <Card className={`p-8 border-border/50 bg-card/50 backdrop-blur-sm shadow-lg transition-all ${showFeedback ? (isCorrect ? 'border-success/50 shadow-success/10' : 'border-destructive/50 shadow-destructive/10') : ''}`}>
             <div className="space-y-6">
               <div className="flex items-start gap-3">
                 <div className="text-3xl">{rule.icon}</div>
@@ -212,9 +218,9 @@ export function RuleQuiz({ rule, quizzes, onComplete, previousScore, isMastered 
                           <Label
                             htmlFor={`option-${index}`}
                             className={`
-                              flex items-center gap-3 p-4 rounded-lg border-2 cursor-pointer transition-all
+                              flex items-center gap-3 p-4 rounded-xl border-2 cursor-pointer transition-all
                               ${isSelected && !showFeedback ? 'border-primary bg-primary/5' : 'border-border'}
-                              ${showCorrect ? 'border-accent bg-accent/10' : ''}
+                              ${showCorrect ? 'border-success bg-success/10' : ''}
                               ${showIncorrect ? 'border-destructive bg-destructive/10' : ''}
                               ${showFeedback ? 'cursor-default' : 'hover:border-primary/50'}
                             `}
@@ -222,7 +228,7 @@ export function RuleQuiz({ rule, quizzes, onComplete, previousScore, isMastered 
                             <RadioGroupItem value={index.toString()} id={`option-${index}`} />
                             <span className="flex-1 text-base">{option}</span>
                             {showCorrect && (
-                              <Check className="h-5 w-5 text-accent" weight="bold" />
+                              <Check className="h-5 w-5 text-success" weight="bold" />
                             )}
                             {showIncorrect && (
                               <X className="h-5 w-5 text-destructive" weight="bold" />
@@ -240,10 +246,10 @@ export function RuleQuiz({ rule, quizzes, onComplete, previousScore, isMastered 
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                 >
-                  <Alert className={isCorrect ? 'border-accent bg-accent/5' : 'border-destructive bg-destructive/5'}>
+                  <Alert className={isCorrect ? 'border-success/50 bg-success/5' : 'border-destructive/50 bg-destructive/5'}>
                     <div className="flex items-start gap-2">
                       {isCorrect ? (
-                        <Check className="h-5 w-5 text-accent mt-0.5" weight="bold" />
+                        <Check className="h-5 w-5 text-success mt-0.5" weight="bold" />
                       ) : (
                         <X className="h-5 w-5 text-destructive mt-0.5" weight="bold" />
                       )}

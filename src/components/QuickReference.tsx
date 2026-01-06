@@ -40,19 +40,19 @@ export function QuickReference({ rules, progress }: QuickReferenceProps) {
 
   return (
     <div className="space-y-6">
-      <Card className="retro-card p-6">
-        <h2 className="text-3xl font-bold mb-4 retro-text-shadow">📖 Quick Reference Guide 📖</h2>
-        <p className="text-lg font-bold text-purple-700 mb-4">
-          ★·.·´¯`·.·★ A quick overview of all community rules ★·.·´¯`·.·★
+      <Card className="p-6 border-border/50 bg-card/50 backdrop-blur-sm">
+        <h2 className="text-3xl font-bold mb-3">Quick Reference Guide</h2>
+        <p className="text-muted-foreground mb-6">
+          A quick overview of all community rules
         </p>
         
         <div className="relative">
-          <MagnifyingGlass className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-purple-600 sparkle" weight="bold" />
+          <MagnifyingGlass className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" weight="duotone" />
           <Input
-            placeholder="Search rules... 🔍"
+            placeholder="Search rules..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-10 border-4 border-double border-purple-400 font-bold text-base"
+            className="pl-10"
           />
         </div>
       </Card>
@@ -75,27 +75,27 @@ export function QuickReference({ rules, progress }: QuickReferenceProps) {
                 transition={{ delay: index * 0.05 }}
               >
                 <Collapsible open={isExpanded} onOpenChange={() => toggleRule(rule.id)}>
-                  <Card className={`retro-card overflow-hidden ${isMastered ? 'pulse-glow' : ''}`}>
+                  <Card className={`overflow-hidden border-border/50 bg-card/50 backdrop-blur-sm ${isMastered ? 'border-success/30' : ''}`}>
                     <CollapsibleTrigger className="w-full">
-                      <div className="p-6 flex items-center gap-4 hover:bg-gradient-to-r hover:from-pink-100 hover:to-purple-100 transition-all">
-                        <div className="text-4xl sparkle">{rule.icon}</div>
+                      <div className="p-6 flex items-center gap-4 hover:bg-accent/50 transition-all">
+                        <div className="text-3xl">{rule.icon}</div>
                         
                         <div className="flex-1 text-left">
                           <div className="flex items-center gap-2 mb-1">
-                            <h3 className="font-bold text-xl">{rule.title}</h3>
+                            <h3 className="font-semibold text-lg">{rule.title}</h3>
                             {isMastered && (
-                              <Badge className="retro-border text-xs font-bold bg-gradient-to-r from-yellow-300 to-orange-300">
-                                Mastered!!!
+                              <Badge className="text-xs font-semibold bg-success text-success-foreground border-0">
+                                Mastered
                               </Badge>
                             )}
                             {isRead && !isMastered && (
-                              <Badge variant="outline" className="text-xs font-bold border-2 border-green-500">
+                              <Badge variant="outline" className="text-xs font-medium">
                                 <Check className="h-3 w-3 mr-1" />
-                                Read ✓
+                                Read
                               </Badge>
                             )}
                           </div>
-                          <p className="text-base font-semibold text-purple-700 line-clamp-2">
+                          <p className="text-sm text-muted-foreground line-clamp-2">
                             {rule.description}
                           </p>
                         </div>
@@ -104,20 +104,20 @@ export function QuickReference({ rules, progress }: QuickReferenceProps) {
                           animate={{ rotate: isExpanded ? 180 : 0 }}
                           transition={{ duration: 0.2 }}
                         >
-                          <CaretDown className="h-6 w-6 text-purple-600" weight="bold" />
+                          <CaretDown className="h-6 w-6 text-muted-foreground" weight="bold" />
                         </motion.div>
                       </div>
                     </CollapsibleTrigger>
 
                     <CollapsibleContent>
-                      <div className="px-6 pb-6 pt-2 space-y-4 border-t-4 border-double border-purple-400">
+                      <div className="px-6 pb-6 pt-2 space-y-4 border-t border-border/50">
                         <div>
-                          <h4 className="font-bold mb-2 text-base uppercase tracking-wide text-purple-700">
-                            ✨ Key Examples ✨
+                          <h4 className="font-semibold mb-3 text-sm uppercase tracking-wide text-muted-foreground">
+                            Key Examples
                           </h4>
                           <ul className="space-y-2">
                             {rule.examples.map((example, idx) => (
-                              <li key={idx} className="flex items-start gap-2 text-base font-semibold">
+                              <li key={idx} className="flex items-start gap-2 text-sm">
                                 <span className="text-primary mt-1">•</span>
                                 <span>{example}</span>
                               </li>
@@ -127,10 +127,10 @@ export function QuickReference({ rules, progress }: QuickReferenceProps) {
 
                         <div className="grid sm:grid-cols-2 gap-4">
                           <div>
-                            <h4 className="font-semibold mb-2 text-sm text-accent">✓ Do This</h4>
+                            <h4 className="font-semibold mb-2 text-sm text-success">Do This</h4>
                             <ul className="space-y-1.5">
                               {rule.doExamples.map((example, idx) => (
-                                <li key={idx} className="text-sm bg-accent/5 p-2 rounded border border-accent/20">
+                                <li key={idx} className="text-sm bg-success/5 p-2.5 rounded-lg border border-success/20">
                                   {example}
                                 </li>
                               ))}
@@ -138,10 +138,10 @@ export function QuickReference({ rules, progress }: QuickReferenceProps) {
                           </div>
 
                           <div>
-                            <h4 className="font-semibold mb-2 text-sm text-destructive">✗ Don't Do This</h4>
+                            <h4 className="font-semibold mb-2 text-sm text-destructive">Don't Do This</h4>
                             <ul className="space-y-1.5">
                               {rule.dontExamples.map((example, idx) => (
-                                <li key={idx} className="text-sm bg-destructive/5 p-2 rounded border border-destructive/20">
+                                <li key={idx} className="text-sm bg-destructive/5 p-2.5 rounded-lg border border-destructive/20">
                                   {example}
                                 </li>
                               ))}
@@ -158,7 +158,7 @@ export function QuickReference({ rules, progress }: QuickReferenceProps) {
         </AnimatePresence>
 
         {filteredRules.length === 0 && (
-          <Card className="p-12 text-center">
+          <Card className="p-12 text-center border-border/50 bg-card/50 backdrop-blur-sm">
             <p className="text-muted-foreground">No rules match your search.</p>
           </Card>
         )}

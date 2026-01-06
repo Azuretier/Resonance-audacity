@@ -1,13 +1,13 @@
 # Planning Guide
 
-An interactive, gamified ruleset learning application for the Azure Community Discord server that teaches community rules through engaging quiz-based challenges, memory games, and progress tracking - now with super nostalgic early 2000s web aesthetics!
+An interactive, gamified ruleset learning application for the Azure Community Discord server that teaches community rules through engaging quiz-based challenges and progress tracking with a clean, modern interface.
 
 **Experience Qualities**:
-1. **Nostalgic & Fun** - Transport users back to the golden age of the early internet with playful, retro web design
-2. **Educational & Engaging** - Learning rules should feel fun and rewarding, not like reading a boring legal document
+1. **Clean & Professional** - Modern, polished design that feels trustworthy and easy to navigate
+2. **Educational & Engaging** - Learning rules should feel rewarding and clear, not overwhelming or boring
 3. **Gamified & Progressive** - Users earn points and unlock sections as they master each rule, creating motivation to complete
 
-**Complexity Level**: Light Application (multiple features with basic state) - This is a learning app with quizzes, progress tracking, and nostalgic decorations that enhance the playful learning experience.
+**Complexity Level**: Light Application (multiple features with basic state) - This is a learning app with quizzes, progress tracking, and smooth animations that enhance the learning experience.
 
 ## Essential Features
 For each core feature:
@@ -46,92 +46,93 @@ For each core feature:
 
 ## Design Direction
 
-A super nostalgic early 2000s web aesthetic celebrating the playful, experimental design of the internet's golden age. Think animated GIFs, rainbow gradients, Comic Sans vibes, sparkles everywhere, marquee text, thick colorful borders, and unapologetically fun visual effects.
+A clean, modern interface with thoughtful use of subtle gradients, generous whitespace, and refined typography. The design emphasizes clarity and professionalism while maintaining visual interest through careful use of color and smooth animations.
 
 ## Color Selection
 
-Vibrant, saturated rainbow colors that evoke GeoCities and MySpace aesthetics.
+A sophisticated color palette centered around a refined purple-blue primary with professional supporting colors.
 
-- **Primary Color**: Hot Magenta/Purple (oklch(0.55 0.25 320)) - Main brand color with maximum 90s energy
-- **Secondary Colors**: Electric Cyan (oklch(0.75 0.20 180)) - Supporting color for contrast and variety
-- **Accent Color**: Lime Green (oklch(0.65 0.22 140)) - Success states and attention-grabbing highlights
-- **Background**: Animated rainbow gradient cycling through pink, cyan, yellow, and green
-- **Card Backgrounds**: White/cream with outset borders and colorful drop shadows
+- **Primary Color**: Deep Purple-Blue (oklch(0.45 0.15 265)) - Professional, trustworthy brand color
+- **Secondary Colors**: Subtle Gray (oklch(0.95 0.01 240)) - Clean, unobtrusive backgrounds
+- **Accent Color**: Soft Purple (oklch(0.92 0.015 265)) - Gentle highlights and hover states
+- **Success**: Balanced Green (oklch(0.60 0.15 145)) - Achievement and positive feedback
+- **Warning**: Warm Amber (oklch(0.70 0.15 65)) - Caution without alarm
+- **Background**: Off-white with subtle cool tint (oklch(0.98 0.005 240))
 
 **Foreground/Background Pairings**:
-- Primary on White (oklch(0.55 0.25 320) / oklch(0.99 0 0)): Black text (oklch(0.15 0 0)) - Ratio 12:1 ✓
-- Accent on White (oklch(0.65 0.22 140) / oklch(0.99 0 0)): Black text (oklch(0.15 0 0)) - Ratio 8.5:1 ✓
-- Secondary on White (oklch(0.75 0.20 180) / oklch(0.99 0 0)): Black text (oklch(0.15 0 0)) - Ratio 11:1 ✓
+- Primary on White (oklch(0.45 0.15 265) / oklch(1 0 0)): White text (oklch(0.99 0 0)) - Ratio 9.2:1 ✓
+- Success on White (oklch(0.60 0.15 145) / oklch(1 0 0)): White text (oklch(0.99 0 0)) - Ratio 5.8:1 ✓
+- Text on Background (oklch(0.13 0.01 240) / oklch(0.98 0.005 240)): Black text - Ratio 14.5:1 ✓
 
 ## Font Selection
 
-Embrace the casual, playful typography of early web with Comic Sans as the primary font, evoking maximum nostalgia.
+Modern, professional typography emphasizing clarity and readability.
 
-- **Primary Font**: Comic Sans MS (with Space Grotesk as fallback) - The iconic nostalgic font
-- **Accent Font**: Courier New / JetBrains Mono - For stats, scores, and technical elements
+- **Primary Font**: Space Grotesk - Clean, contemporary sans-serif with excellent screen readability
+- **Accent Font**: JetBrains Mono - For numeric data, scores, and technical elements
 
 **Typographic Hierarchy**:
-- H1 (App Title): Comic Sans Bold/32px/colorful text shadow (pink/cyan/yellow layers)
-- H2 (Section Titles): Comic Sans Bold/24px/text shadow
-- H3 (Rule Names): Comic Sans Bold/20px
-- Body (Rule Text): Comic Sans Regular/16px/1.6 line height
-- Stats/Scores: Courier New Bold/24px/gradient text
+- H1 (App Title): Space Grotesk Bold/48px/tight tracking with subtle gradient
+- H2 (Section Titles): Space Grotesk Bold/32px
+- H3 (Rule Names): Space Grotesk Semibold/24px
+- Body (Rule Text): Space Grotesk Regular/16px/1.6 line height
+- Stats/Scores: JetBrains Mono Bold/40px/tabular numerals
 
 ## Animations
 
-Animations should celebrate the experimental, playful spirit of early web design with generous use of movement, sparkles, and attention-grabbing effects.
+Animations should feel smooth, purposeful, and professional - enhancing usability without calling attention to themselves.
 
 Key animation moments:
-- Rainbow gradient background continuously cycles (8s infinite)
-- Floating stars twinkle across the entire page (2s infinite per star)
-- Icons sparkle with rotating hue animation (2s infinite)
-- Floating decorative elements (smileys, hearts, stars) at screen corners
-- Scrolling marquee text at bottom of screen
-- Elements float gently up and down (3s infinite)
-- Rotating emojis and icons
-- Glowing borders pulse with colorful shadows
-- Perfect quiz scores trigger confetti burst
-- Completed badges bounce in with spring animation
+- Subtle fade-in-up on page elements (500ms ease-out)
+- Smooth tab transitions with slide animations (300ms)
+- Progress bar fills with easing (300ms cubic-bezier)
+- Card hover states with gentle scale (200ms)
+- Badge appearances with spring physics
+- Confetti on perfect scores (celebratory moment)
+- Collapsible sections expand/collapse smoothly (200ms)
+- Button states transition seamlessly (150ms)
 
 ## Component Selection
 
 **Components**:
-- **Card** - Retro-styled with thick outset borders, colorful drop shadows, and gradient backgrounds
-- **Button** - Loud gradient backgrounds, thick borders, glowing pulse animation on CTAs
-- **Badge** - Gradient fills with borders and bold text
-- **Progress** - Thick bars with double borders and gradient fills
-- **Tabs** - Individual bordered buttons with active state gradients
-- **Input** - Thick double borders with bold styling
-- **Collapsible** - Reference guide expandable sections
+- **Card** - Clean borders, subtle shadows, optional backdrop blur for layering
+- **Button** - Clear hierarchy with primary, secondary, and ghost variants
+- **Badge** - Minimal design with semantic color coding
+- **Progress** - Smooth bars with rounded ends
+- **Tabs** - Underlined active state with smooth transitions
+- **Input** - Clean borders with focus ring
+- **Collapsible** - Smooth expand/collapse for reference guide
 
 **Customizations**:
-- Remove all border radius (everything is square/rectangular)
-- Thick borders (3-4px) with ridge/outset/double styles
-- Colorful drop shadows (offset layered shadows in different colors)
-- Gradient backgrounds on all interactive elements
-- Animated decorations component with stars, sparkles, hearts
-- Custom CSS animations for twinkle, float, rotate, sparkle effects
+- Generous border radius (0.75rem) for friendly, modern feel
+- Subtle borders (1px) with semi-transparent colors
+- Soft shadows for depth without harshness
+- Backdrop blur on cards for sophisticated layering
+- Gradient backgrounds using radial patterns for subtle depth
+- Smooth transitions on all interactive elements
 
 **States**:
-- Buttons: Default (gradient bg + border), Hover (pulse glow), Active (scale), Disabled (grayscale)
-- Cards: Retro border with shadow, hover brightens gradient
-- Icons: Many have sparkle animation applied
+- Buttons: Default (solid), Hover (subtle shadow), Active (scale 0.98), Disabled (opacity 0.5)
+- Cards: Subtle border with shadow, hover slightly lifts with increased shadow
+- Icons: Duotone weight for visual interest without heaviness
 
 **Icon Selection**:
-- Star (phosphor) - Everywhere for decoration and points
-- Sparkle (phosphor) - Decorative element throughout
-- Heart (phosphor) - Corner decorations
-- Smiley (phosphor) - Rotating corner decoration
-- Trophy (phosphor) - Mastery and achievements
 - ShieldCheck (phosphor) - Rules and completion
+- Trophy (phosphor) - Mastery and achievements  
+- Books (phosphor) - Learning section
+- Play (phosphor) - Quiz section
+- Star (phosphor) - Points and ratings
+- Lock (phosphor) - Locked content
 
 **Spacing**:
-- Generous padding on all elements
-- Thick borders take up visual space
-- Cards have large drop shadows creating depth
+- Consistent 8px grid system
+- Generous padding (24px) on cards
+- Clear visual grouping with gap utilities
+- Ample whitespace for breathing room
 
 **Mobile**:
-- All decorations scale down but remain visible
-- Stack elements vertically
-- Maintain thick borders and shadows
-- Touch targets remain large (48px+)
+- Stack elements vertically below 768px
+- Maintain comfortable touch targets (44px minimum)
+- Responsive typography scaling
+- Collapsible navigation if needed
+- Generous padding maintained on mobile

@@ -147,90 +147,91 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen relative">
+    <div className="min-h-screen bg-background">
       <Toaster position="top-right" />
       {showConfetti && <Confetti />}
-      <RetroDecorations />
 
-      <div className="relative overflow-hidden pb-4">
-        <div className="absolute inset-0 bg-gradient-to-br from-pink-300/30 via-cyan-300/30 to-yellow-300/30" />
+      <div className="relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,oklch(0.45_0.15_265/0.1),transparent_50%)]" />
       </div>
 
-      <div className="relative max-w-5xl mx-auto px-4 py-6 space-y-6 z-10">
+      <div className="relative max-w-6xl mx-auto px-4 py-8 space-y-8">
         <motion.header 
-          className="space-y-4"
+          className="space-y-6"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <div className="flex items-center justify-between flex-wrap gap-4">
-            <div className="flex items-center gap-3">
-              <div className="p-3 retro-border bg-gradient-to-br from-pink-200 to-purple-200" style={{ animation: 'float 3s ease-in-out infinite' }}>
-                <ShieldCheck className="h-8 w-8 text-primary sparkle" weight="fill" />
+          <div className="flex items-start justify-between flex-wrap gap-6">
+            <div className="flex items-center gap-4">
+              <div className="relative">
+                <div className="absolute inset-0 bg-primary/10 blur-2xl rounded-full" />
+                <div className="relative p-4 bg-gradient-to-br from-primary/10 to-accent/10 rounded-2xl border border-border/50 backdrop-blur-sm">
+                  <ShieldCheck className="h-10 w-10 text-primary" weight="duotone" />
+                </div>
               </div>
               <div>
-                <h1 className="text-3xl md:text-4xl font-bold tracking-tight retro-text-shadow">
-                  Learn Community Rules
+                <h1 className="text-4xl md:text-5xl font-bold tracking-tight bg-gradient-to-br from-foreground to-foreground/60 bg-clip-text text-transparent">
+                  Community Rules
                 </h1>
-                <p className="text-lg font-bold" style={{ 
-                  background: 'linear-gradient(90deg, #ff00ff, #00ffff, #ffff00, #ff00ff)',
-                  backgroundSize: '200% 100%',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  animation: 'marquee 3s linear infinite'
-                }}>
-                  ★·.·´¯`·.·★ Azure Community • Interactive Learning ★·.·´¯`·.·★
+                <p className="text-muted-foreground mt-1 text-lg">
+                  Azure Community · Interactive Learning
                 </p>
               </div>
             </div>
 
             <div className="flex items-center gap-4">
-              <div className="text-right retro-card p-4">
-                <p className="text-sm font-bold text-purple-600">⭐ Total Points ⭐</p>
-                <p className="text-3xl font-bold font-mono pulse-glow" style={{
-                  background: 'linear-gradient(45deg, #ff00ff, #00ffff)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent'
-                }}>{totalPoints}</p>
+              <div className="text-right">
+                <p className="text-sm text-muted-foreground mb-1">Total Points</p>
+                <p className="text-4xl font-bold font-mono tabular-nums bg-gradient-to-br from-primary to-primary/60 bg-clip-text text-transparent">
+                  {totalPoints}
+                </p>
               </div>
               {allRulesMastered && (
-                <Badge className="retro-border px-4 py-2 text-base font-bold bg-gradient-to-r from-yellow-300 to-pink-300 bounce-in">
-                  <Trophy className="h-4 w-4 mr-1 sparkle" weight="fill" />
-                  Rules Master!!!
-                </Badge>
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ type: "spring", duration: 0.5 }}
+                >
+                  <Badge className="px-4 py-2 text-base font-semibold bg-gradient-to-r from-success to-success/80 text-success-foreground border-0 shadow-lg shadow-success/20">
+                    <Trophy className="h-5 w-5 mr-2" weight="fill" />
+                    Rules Master
+                  </Badge>
+                </motion.div>
               )}
             </div>
           </div>
 
-          <Card className="retro-card p-6">
-            <div className="space-y-2">
-              <div className="flex justify-between items-center text-sm font-bold">
-                <span className="text-purple-700">✿ Overall Progress ✿</span>
-                <span className="text-cyan-700">
-                  {completedRules}/{totalRules} rules completed • {masteredRules} mastered ⭐
+          <Card className="border-border/50 shadow-sm bg-card/50 backdrop-blur-sm">
+            <div className="p-6 space-y-3">
+              <div className="flex justify-between items-center text-sm">
+                <span className="text-muted-foreground font-medium">Overall Progress</span>
+                <span className="text-foreground font-semibold">
+                  {completedRules}/{totalRules} completed · {masteredRules} mastered
                 </span>
               </div>
-              <Progress value={overallProgress} className="h-4 border-4 border-double border-purple-500" />
+              <Progress value={overallProgress} className="h-3" />
             </div>
           </Card>
         </motion.header>
 
         <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as any)} className="space-y-6">
-          <TabsList className="grid w-full grid-cols-4 h-auto p-2 retro-border bg-gradient-to-r from-pink-200 via-cyan-200 to-yellow-200">
-            <TabsTrigger value="learn" className="gap-2 py-3 font-bold border-2 border-purple-400 data-[state=active]:bg-gradient-to-br data-[state=active]:from-pink-300 data-[state=active]:to-purple-300 data-[state=active]:retro-text-shadow">
-              <Books className="h-4 w-4" weight="fill" />
+          <TabsList className="grid w-full grid-cols-4 h-auto p-1.5 bg-muted/50 border border-border/50 backdrop-blur-sm">
+            <TabsTrigger value="learn" className="gap-2 py-3 font-medium data-[state=active]:bg-card data-[state=active]:shadow-sm">
+              <Books className="h-4 w-4" weight="duotone" />
               <span className="hidden sm:inline">Learn</span>
             </TabsTrigger>
-            <TabsTrigger value="quiz" className="gap-2 py-3 font-bold border-2 border-cyan-400 data-[state=active]:bg-gradient-to-br data-[state=active]:from-cyan-300 data-[state=active]:to-blue-300 data-[state=active]:retro-text-shadow" disabled={!canAccessQuiz}>
-              <Play className="h-4 w-4" weight="fill" />
+            <TabsTrigger value="quiz" className="gap-2 py-3 font-medium data-[state=active]:bg-card data-[state=active]:shadow-sm" disabled={!canAccessQuiz}>
+              <Play className="h-4 w-4" weight="duotone" />
               <span className="hidden sm:inline">Quiz</span>
               {!canAccessQuiz && <Lock className="h-3 w-3" />}
             </TabsTrigger>
-            <TabsTrigger value="progress" className="gap-2 py-3 font-bold border-2 border-yellow-400 data-[state=active]:bg-gradient-to-br data-[state=active]:from-yellow-300 data-[state=active]:to-orange-300 data-[state=active]:retro-text-shadow">
-              <Trophy className="h-4 w-4" weight="fill" />
+            <TabsTrigger value="progress" className="gap-2 py-3 font-medium data-[state=active]:bg-card data-[state=active]:shadow-sm">
+              <Trophy className="h-4 w-4" weight="duotone" />
               <span className="hidden sm:inline">Progress</span>
             </TabsTrigger>
-            <TabsTrigger value="reference" className="gap-2 py-3 font-bold border-2 border-green-400 data-[state=active]:bg-gradient-to-br data-[state=active]:from-green-300 data-[state=active]:to-emerald-300 data-[state=active]:retro-text-shadow">
-              <ShieldCheck className="h-4 w-4" weight="fill" />
+            <TabsTrigger value="reference" className="gap-2 py-3 font-medium data-[state=active]:bg-card data-[state=active]:shadow-sm">
+              <ShieldCheck className="h-4 w-4" weight="duotone" />
               <span className="hidden sm:inline">Reference</span>
             </TabsTrigger>
           </TabsList>
@@ -258,7 +259,7 @@ function App() {
                   <Button
                     onClick={() => setCurrentRuleIndex(ruleIndex + 1)}
                     variant="ghost"
-                    className="gap-2 font-bold retro-border"
+                    className="gap-2"
                     disabled={!currentProgress?.read}
                   >
                     Skip to Next Rule
@@ -285,15 +286,19 @@ function App() {
                     isMastered={currentProgress?.mastered || false}
                   />
                 ) : (
-                  <Card className="retro-card p-12 text-center">
-                    <Lock className="h-16 w-16 text-purple-600 mx-auto mb-4 sparkle" />
-                    <h3 className="text-xl font-bold mb-2 retro-text-shadow">Quiz Locked</h3>
-                    <p className="text-lg font-bold text-cyan-700 mb-4">
-                      Complete the lesson first to unlock the quiz
-                    </p>
-                    <Button onClick={() => setActiveTab('learn')} className="retro-border font-bold">
-                      Go to Lesson
-                    </Button>
+                  <Card className="p-12 text-center border-border/50 bg-card/50 backdrop-blur-sm">
+                    <div className="max-w-md mx-auto space-y-4">
+                      <div className="inline-flex p-4 bg-muted rounded-2xl">
+                        <Lock className="h-12 w-12 text-muted-foreground" weight="duotone" />
+                      </div>
+                      <h3 className="text-2xl font-bold">Quiz Locked</h3>
+                      <p className="text-muted-foreground">
+                        Complete the lesson first to unlock the quiz
+                      </p>
+                      <Button onClick={() => setActiveTab('learn')} className="mt-4">
+                        Go to Lesson
+                      </Button>
+                    </div>
                   </Card>
                 )}
               </motion.div>
