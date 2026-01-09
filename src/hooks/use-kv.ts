@@ -10,7 +10,11 @@ export function useKV<T>(key: string, initialValue: T): [T, (value: T | ((prev: 
   const [state, setState] = useState<T>(() => {
     try {
       const item = localStorage.getItem(key)
-      return item ? JSON.parse(item) : initialValue
+      // Check if item exists and is not empty/whitespace before parsing
+      if (item && item.trim()) {
+        return JSON.parse(item)
+      }
+      return initialValue
     } catch {
       return initialValue
     }
@@ -18,7 +22,12 @@ export function useKV<T>(key: string, initialValue: T): [T, (value: T | ((prev: 
 
   useEffect(() => {
     try {
-      localStorage.setItem(key, JSON.stringify(state))
+      const serialized = JSON.stringify(state)
+      // Only write to localStorage if the value has actually changed
+      const currentValue = localStorage.getItem(key)
+      if (currentValue !== serialized) {
+        localStorage.setItem(key, serialized)
+      }
     } catch {
       console.error('Failed to save to localStorage')
     }
